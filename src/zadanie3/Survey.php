@@ -4,9 +4,17 @@ class Survey
 {
     private array $questions;
 
-    public function __construct(private DateTimeImmutable $start_time, private DateTimeImmutable $end_time)
-    {
+    public function __construct(
+        private string $uuid,
+        private DateTimeImmutable $start_time,
+        private DateTimeImmutable $end_time
+    ) {
 
+    }
+
+    public function getUuid(): string
+    {
+        return $this->uuid;
     }
 
     public function getStartTime(): DateTimeImmutable

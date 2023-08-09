@@ -1,30 +1,23 @@
 <?php
 
-require_once __DIR__.'/Question.php';
-require_once __DIR__.'/QuestionInterface.php';
-
 /**
  * Reprezentacja pytania którego oczekiwaną odpowiedzią jest ocena
  */
 class RatingQuestion extends Question
 {
-    public function __construct(string $question, private int $min_rate, private int $max_rate)
+    public function __construct(string $uuid, string $question, int $min_rate, int $max_rate)
     {
-        if($max_rate <= $min_rate) {
+        if ($max_rate <= $min_rate) {
             throw new Exception('Nieprawidłowy zakres oceny');
         }
-        parent::__construct($question);
+        $options = $this->createOptions($min_rate, $max_rate);
+        parent::__construct($uuid, $question, 'SELECT', $options);
     }
 
-    public function getResponseMethod(): string
-    {
-        return 'SELECT';
-    }
-
-    public function getResponseOptions(): array
+    private function createOptions(int $min_rate, int $max_rate): array
     {
         $options = [];
-        for ($i = $this->min_rate; $i <= $this->max_rate; $i++) {
+        for ($i = $min_rate; $i <= $max_rate; $i++) {
             $options[] = $i;
         }
         return $options;
