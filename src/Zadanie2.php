@@ -47,7 +47,6 @@ for($n=0; $n<$contestantsCount; $n++) {
 }
 
 usort($quizResults, 'contestantCmp');
-$quizResults = array_reverse($quizResults);
 
 $winnersCount = count($quizResults);
 print "Oto lista laureatów konkursu dla dzieci. Należało zdobyć przynajmneij $thershold punktów i warunek spełniło $winnersCount osób. A oto zwycięzcy:\n\n";
@@ -57,5 +56,5 @@ for($n=0; $n<$winnersCount; $n++) {
 
 function contestantCmp(array $contestant_1, array $contestant_2)
 {
-    return strcmp($contestant_1[1], $contestant_2[1]);
+    return strcmp($contestant_2[1], $contestant_1[1]);
 }
