@@ -19,6 +19,10 @@ Błąd w tym zadaniu polega na tym, że nie wzięto faktu usunięcia pewnej czę
 W związku z powyższym, część kluczy już nie istnieje a pętla foreach próbuje się do nich odnosić.
 Rozwiązałem ten problem dodając jedynie jedną linię kodu która spowoduje, że klucze będą ponownie po kolei.
 Drugie rozwiązanie to zamiana pętli for na foreach jednak chciałem to zrobić minimalistycznie :)
+
+Oprócz odnoszenia się do nieprawidłowych kluczy, brakowało jeszcze sortowania.
+Funkcja "usort" rozwiązuje obydwa problemy które istnieją w poniższym kodzie.
+Zmienia klucze na nowe licząc od 0 i jednocześnie realizuje sortowanie z użyciem wybranej funkcji.
  */
 $quizResults = [
     ["Ania",75],
@@ -42,7 +46,8 @@ for($n=0; $n<$contestantsCount; $n++) {
     }
 }
 
-$quizResults = array_values($quizResults);
+usort($quizResults, 'contestantCmp');
+$quizResults = array_reverse($quizResults);
 
 $winnersCount = count($quizResults);
 print "Oto lista laureatów konkursu dla dzieci. Należało zdobyć przynajmneij $thershold punktów i warunek spełniło $winnersCount osób. A oto zwycięzcy:\n\n";
@@ -50,5 +55,7 @@ for($n=0; $n<$winnersCount; $n++) {
     print ($n+1).") ".$quizResults[$n][0]." - ".$quizResults[$n][1]." pkt,\n";
 }
 
-
-
+function contestantCmp(array $contestant_1, array $contestant_2)
+{
+    return strcmp($contestant_1[1], $contestant_2[1]);
+}
