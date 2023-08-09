@@ -13,7 +13,7 @@ class OneSelectQuestion extends Question
         if ($options === []) {
             throw new Exception('Nie podano opcji wyboru');
         }
-        $this->setQuestion($question);
+        parent::__construct($question);
     }
 
     public function getResponseMethod(): string

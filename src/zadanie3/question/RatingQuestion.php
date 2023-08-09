@@ -13,7 +13,7 @@ class RatingQuestion extends Question
         if($max_rate <= $min_rate) {
             throw new Exception('Nieprawidłowy zakres oceny');
         }
-        $this->setQuestion($question);
+        parent::__construct($question);
     }
 
     public function getResponseMethod(): string

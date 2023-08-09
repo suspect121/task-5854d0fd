@@ -10,7 +10,7 @@ class OpenQuestion extends Question
 {
     public function __construct(string $question)
     {
-        $this->setQuestion($question);
+        parent::__construct($question);
     }
 
     public function getResponseMethod(): string
