@@ -1,0 +1,5 @@
+./.idea
+./conf
+./dump
+./docker-compose.yaml
+./Dockerfile
