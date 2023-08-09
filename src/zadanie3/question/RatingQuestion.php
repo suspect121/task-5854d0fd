@@ -10,6 +10,9 @@ class RatingQuestion extends Question
 {
     public function __construct(string $question, private int $min_rate, private int $max_rate)
     {
+        if($max_rate <= $min_rate) {
+            throw new Exception('Nieprawidłowy zakres oceny');
+        }
         $this->setQuestion($question);
     }
 
